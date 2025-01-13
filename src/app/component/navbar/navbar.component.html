@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <button mat-button color="accent" routerLink=" "><mat-icon>home</mat-icon></button>
+    <div>AMS</div>
+    <span class="example-spacer"></span>
+    <div *ngIf="userlogin">
+        <button mat-button routerLink="input">Performance details</button>
+        <button mat-button routerLink="athlete">Athlete</button>
+        <button mat-button routerLink="team">Team</button>
+        <button mat-button routerLink="movement">Movement</button>
+    </div>
+    <button mat-button routerLink="login">{{userlogin? "Logout": "Login"}}</button>
+</mat-toolbar>

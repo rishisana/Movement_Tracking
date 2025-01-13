@@ -1,0 +1,74 @@
+<table>
+    <thead>
+        <th>Team</th>
+        <th>Athletes</th>
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addTeam">Add Team</button>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of teams">
+            <td>{{t.team_name}}</td>
+            <td *ngFor="let a of t.athletes">
+                {{a.name}} 
+            </td>
+            <button class="btn btn-outline-success" (click)="editModal(t)" data-bs-toggle="modal" data-bs-target="#editTeam">Edit</button>
+            <button class="btn btn-outline-warning" (click)="deleteTeam(t)">Delete</button>
+        </tr>
+    </tbody>
+</table>
+
+<!-- modal to edit team -->
+<!-- <div class="modal fade" id="editTeam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Team</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="teamEditButton">
+                    <form [formGroup]="updateTeam">
+                        <input type="text" placeholder="Enter Team Name" formControlName="team_name">
+                        <div formGroupName="athletes">
+                        <input type="text" placeholder="Enter Name" formControlName="name">
+                        <input type="text" placeholder="Enter Age" formControlName="age">
+                        <input type="text" placeholder="Enter Team" formControlName="team">
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editTeam()">Update
+                    Athlete</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- modal to add athlete -->
+<!-- <div class="modal fade" id="addTeam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Athlete</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="addButton">
+                    <form [formGroup]="newTeam">
+                        <input type="text" placeholder="Enter Name" formControlName="name">
+                        <input type="text" placeholder="Enter Age" formControlName="age">
+                        <input type="text" placeholder="Enter Team" formControlName="team">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addTeam(newTeam.value)">Update
+                    Athlete</button>
+            </div>
+        </div>
+    </div>
+</div> -->

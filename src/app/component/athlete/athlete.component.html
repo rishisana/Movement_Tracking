@@ -1,0 +1,73 @@
+<table>
+    <thead>
+        <th>Id</th>
+        <th>Athlete</th>
+        <th>Age</th>
+        <th>Team</th>
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addAthlete">Add Athlete</button>
+    </thead>
+    <tbody>
+        <tr *ngFor="let a of athletes">
+            <td> <button [routerLink]="['/athlete', a.id]">{{a.id}}</button> </td>
+            <td>{{a.name}}</td>
+            <td>{{a.age}}</td>
+            <td>{{a.team}}</td>
+            <button class="btn btn-outline-success" (click)="editModal(a)" data-bs-toggle="modal" data-bs-target="#editAthlete">Edit</button>
+            <button class="btn btn-outline-warning" (click)="deleteAthlete(a)">Delete</button>
+        </tr>
+    </tbody>
+</table>
+
+<!-- modal to edit athlete -->
+<div class="modal fade" id="editAthlete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Athlete</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="addButton">
+                    <form [formGroup]="changeAthlete">
+                        <input type="text" placeholder="Enter Name" formControlName="name">
+                        <input type="text" placeholder="Enter Age" formControlName="age">
+                        <input type="text" placeholder="Enter Team" formControlName="team">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editAthlete()">Update
+                    Athlete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal to add athlete -->
+<div class="modal fade" id="addAthlete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Athlete</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="addButton">
+                    <form [formGroup]="newAthlete">
+                        <input type="text" placeholder="Enter Name" formControlName="name">
+                        <input type="text" placeholder="Enter Age" formControlName="age">
+                        <input type="text" placeholder="Enter Team" formControlName="team">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addAthlete(newAthlete.value)">Update
+                    Athlete</button>
+            </div>
+        </div>
+    </div>
+</div>

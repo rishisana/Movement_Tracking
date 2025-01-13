@@ -1,0 +1,10 @@
+.card{
+    height: 100%;
+    width: 25%;
+    margin: 100px 30px 20px 30%;
+    padding: 40px 30px 20px 20px;
+    background-color: lightblue
+}
+.card button{
+    margin-top: 10px;
+}

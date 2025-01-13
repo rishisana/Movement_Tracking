@@ -1,0 +1,16 @@
+<div>
+    <div class="card">
+        <form [formGroup]="signUp" (ngSubmit)="onSignUp()">
+            <label for="emailId">User Name: </label>
+            <input type="email" id="userName" placeholder="Enter UserName" formControlName="userName">
+            <br>
+            <label for="emailId">Email Id: </label>
+            <input type="email" id="emailId" placeholder="Enter EmailId" formControlName="emailId">
+            <br>
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter Password" formControlName="password">
+            <br>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    </div>
+</div>

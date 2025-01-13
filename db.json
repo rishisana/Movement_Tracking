@@ -1,0 +1,167 @@
+{
+  "athletes": [
+    {
+      "name": "Chiranjeevi",
+      "age": 23,
+      "team": "Team2",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "Ram",
+      "age": 21,
+      "team": "Team1"
+    },
+    {
+      "id": 3,
+      "name": "Sita",
+      "age": 26,
+      "team": "Team1"
+    },
+    {
+      "id": 4,
+      "name": "Venky",
+      "age": 25,
+      "team": "Team2"
+    },
+    {
+      "id": 5,
+      "name": "Nag",
+      "age": 28,
+      "team": "Team2"
+    },
+    {
+      "name": "Pallavi",
+      "age": 21,
+      "team": "Team3",
+      "id": 6
+    },
+    {
+      "id": 8,
+      "name": "Poo",
+      "age": 27,
+      "team": "Team2"
+    },
+    {
+      "id": 9,
+      "name": "sam",
+      "age": 22,
+      "team": "Team3"
+    },
+    {
+      "name": "manjusha",
+      "age": 28,
+      "team": "Team2",
+      "id": 12
+    }
+  ],
+  "movements": [
+    {
+      "mov_name": "vertical",
+      "type": "speed",
+      "id": 1
+    },
+    {
+      "mov_name": "back squat",
+      "type": "weight",
+      "id": 2
+    },
+    {
+      "mov_name": "bench press",
+      "type": "speed",
+      "id": 3
+    }
+  ],
+  "teams": [
+    {
+      "team_name": "Team1",
+      "athletes": [
+        {
+          "id": 8,
+          "name": "Poo",
+          "age": 27,
+          "team": "Team1"
+        },
+        {
+          "id": 2,
+          "name": "Ram",
+          "age": 21,
+          "team": "Team1"
+        },
+        {
+          "id": 3,
+          "name": "Sita",
+          "age": 26,
+          "team": "Team1"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "team_name": "Team2",
+      "athletes": [
+        {
+          "id": 5,
+          "name": "Nag",
+          "age": 28,
+          "team": "Team2"
+        },
+        {
+          "id": 2,
+          "name": "Ram",
+          "age": 21,
+          "team": "Team2"
+        },
+        {
+          "name": "manjusha",
+          "age": 28,
+          "team": "Team2",
+          "id": 12
+        }
+      ],
+      "id": 2
+    }
+  ],
+  "inputs": [
+    {
+      "date": "2023-11-21",
+      "movement": "vertical",
+      "team": {
+        "team_name": "Team1",
+        "athlete_name": "Nag",
+        "assessment": 21
+      },
+      "id": 1
+    },
+    {
+      "date": "2023-11-22",
+      "movement": "back squat",
+      "team_name": "Team1",
+      "athlete": {
+        "athlete_name": null,
+        "assessment": 23
+      },
+      "id": 2
+    },
+    {
+      "date": "2023-11-15",
+      "movement": "back squat",
+      "team_name": "Team1",
+      "athlete": {
+        "athlete_name": null,
+        "assessment": 28
+      },
+      "id": 3
+    },
+    {
+      "date": "2023-11-21",
+      "movement": "bench press",
+      "team_name": "Team1",
+      "athlete": {
+        "athlete_name": null,
+        "assessment": 432
+      },
+      "id": 4
+    }
+  ]
+}

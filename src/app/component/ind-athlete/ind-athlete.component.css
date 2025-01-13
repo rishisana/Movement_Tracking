@@ -1,0 +1,31 @@
+table, tr, td, th{
+    border: 2px solid black;
+    width: 600px;
+    margin-left: 10px;
+}
+.card{
+    width: 600px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 10px;
+    display: inline-block
+  }
+  .employee-image {
+    width: 50%;
+    height: 50%;
+    margin-bottom: 0;
+  }
+  .details{
+    float: right;
+    margin: 40px;
+    padding: 20px;
+    height: 100%;
+  }
+  .details p{
+    padding: 10px;
+  }
+  
+  

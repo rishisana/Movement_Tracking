@@ -1,0 +1,68 @@
+<h1>List of the Movements: </h1>
+<table>
+    <thead>
+        <th>Movement</th>
+        <th>Type</th>
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addMovement">Add Movement</button>
+    </thead>
+    <tbody>
+        <tr *ngFor="let mov of movements">
+            <td>{{mov.mov_name}}</td>
+            <td>{{mov.type}}</td>
+            <button class="btn btn-outline-success" (click)="editModal(mov)" data-bs-toggle="modal" data-bs-target="#editMovement">Edit</button>
+            <button class="btn btn-outline-warning" (click)="deleteAthlete(mov)">Delete</button>
+        </tr>
+    </tbody>
+</table>
+
+<!-- modal to edit movement -->
+<div class="modal fade" id="editMovement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Movement</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="editButton">
+                    <form [formGroup]="editMovement">
+                        <input type="text" placeholder="Enter movement name" name="mov_name" formControlName="mov_name">
+                        <input type="text" placeholder="Enter type" name="type" formControlName="type">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateMovement()">Update
+                    Movement</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal to add movement -->
+<div class="modal fade" id="addMovement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Movement: </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="editButton">
+                    <form [formGroup]="newMovement">
+                        <input type="text" placeholder="Enter movement name" formControlName="mov_name">
+                        <input type="text" placeholder="Enter type" formControlName="type">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addMovement(newMovement.value)">Update
+                    Athlete</button>
+            </div>
+        </div>
+    </div>
+</div>
