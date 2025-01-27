@@ -45,7 +45,8 @@ export class InputDataComponent {
     this.getTeams();
    // this.getAthletes();
   }
-  constructor(private movementService: MovementService, private dataService: DataService, private performanceService: PerformanceService, private teamService: TeamService) { }
+  constructor(private movementService: MovementService, private dataService: DataService, 
+    private performanceService: PerformanceService, private teamService: TeamService) { }
 
   //to get all the list of movements
   getMovements() {
@@ -70,9 +71,7 @@ export class InputDataComponent {
   onChange(event : any){
     this.selectedOption = event.target.value;
     this.teams.forEach((d)=>
-    { if( d.team_name == this.selectedOption){
-     console.log("###########");
-     
+    { if( d.team_name == this.selectedOption){ 
          this.athletes = d.athletes
          this.teamSelected = true
          console.log("The value of the selected option is " + this.selectedOption);

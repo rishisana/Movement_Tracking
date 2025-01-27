@@ -4,12 +4,11 @@ import { Movement } from 'src/app/model/movement';
 import { MovementService } from 'src/app/service/movement.service';
 
 @Component({
-  selector: 'app-movement',
-  templateUrl: './movement.component.html',
-  styleUrls: ['./movement.component.css']
+  selector: 'app-movements',
+  templateUrl: './movements.component.html',
+  styleUrls: ['./movements.component.css']
 })
-export class MovementComponent {
-
+export class MovementsComponent {
 //to retrieve all the movements from the movement service
 movements: Movement[] =[]
 

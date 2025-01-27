@@ -6,9 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { MainComponent } from './component/main/main.component';
 import { LoginComponent } from './component/login/login.component';
-import { AthleteComponent } from './component/athlete/athlete.component';
 import { TeamComponent } from './component/team/team.component';
-import { MovementComponent } from './component/movement/movement.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -19,23 +17,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import { DataService } from './data.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AgGridModule } from 'ag-grid-angular';
 import { InputDataComponent } from './component/input-data/input-data.component';
 import { TeamService } from './service/team.service';
 import { MovementService } from './service/movement.service';
-import { IndAthleteComponent } from './component/ind-athlete/ind-athlete.component';
 import { PerformanceService } from './service/performance.service';
+import { NotfoundComponent } from './component/notfound/notfound.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     MainComponent,
     LoginComponent,
-    AthleteComponent,
     TeamComponent,
-    MovementComponent,
     InputDataComponent,
-    IndAthleteComponent
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +45,6 @@ import { PerformanceService } from './service/performance.service';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    AgGridModule
   ],
   providers: [DataService, TeamService, MovementService, PerformanceService],
   bootstrap: [AppComponent]

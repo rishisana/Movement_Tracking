@@ -17,11 +17,7 @@ export class DataService {
   userlogin : boolean = false;
 
   //To add an athlete to the database
-  addAthlete(athlete: any): Observable<Athlete>{
-    console.log("Entered into the add athlete");
-    console.log("Value of the athlete name "+ athlete.name );
-    console.log("The type of athlete is " + athlete);
-    
+  addAthlete(athlete: any): Observable<Athlete>{    
     return this.http.post<Athlete>(this.serviceUrl, athlete)
   }
 

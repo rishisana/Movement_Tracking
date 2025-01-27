@@ -4,11 +4,11 @@ import { DataService } from 'src/app/data.service';
 import { Athlete } from 'src/app/model/athlete';
 
 @Component({
-  selector: 'app-athlete',
-  templateUrl: './athlete.component.html',
-  styleUrls: ['./athlete.component.css']
+  selector: 'app-atheletes',
+  templateUrl: './atheletes.component.html',
+  styleUrls: ['./atheletes.component.css']
 })
-export class AthleteComponent {
+export class AtheletesComponent {
   imgPath: string = 'assets/istockphoto-1300845620-1024x1024.jpg'
   athletes: Athlete[] = []
   id: number=0

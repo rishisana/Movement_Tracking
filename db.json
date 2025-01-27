@@ -1,7 +1,7 @@
 {
   "athletes": [
     {
-      "name": "Chiranjeevi",
+      "name": "Chiru",
       "age": 23,
       "team": "Team2",
       "id": 1
@@ -49,7 +49,7 @@
       "team": "Team3"
     },
     {
-      "name": "manjusha",
+      "name": "manisha",
       "age": 28,
       "team": "Team2",
       "id": 12
@@ -113,7 +113,7 @@
           "team": "Team2"
         },
         {
-          "name": "manjusha",
+          "name": "manisha",
           "age": 28,
           "team": "Team2",
           "id": 12
@@ -163,5 +163,6 @@
       },
       "id": 4
     }
+  
   ]
 }

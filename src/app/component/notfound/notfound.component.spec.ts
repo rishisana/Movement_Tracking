@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MovementComponent } from './movement.component';
+import { NotfoundComponent } from './notfound.component';
 
-describe('MovementComponent', () => {
-  let component: MovementComponent;
-  let fixture: ComponentFixture<MovementComponent>;
+describe('NotfoundComponent', () => {
+  let component: NotfoundComponent;
+  let fixture: ComponentFixture<NotfoundComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MovementComponent]
+      declarations: [NotfoundComponent]
     });
-    fixture = TestBed.createComponent(MovementComponent);
+    fixture = TestBed.createComponent(NotfoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

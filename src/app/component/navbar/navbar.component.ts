@@ -20,4 +20,8 @@ export class NavbarComponent {
   set userlogin(value){
     this.dataservice.userlogin = value
   }
+
+  logOut(){
+    this.dataservice.userlogin = false
+  }
 }

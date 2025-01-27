@@ -40,3 +40,14 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+.vercel
+.vercelignore
+vercel.json
+.firebase
+.github/workflows
+.firebaserc
+firebase.json
+
+
+
+
