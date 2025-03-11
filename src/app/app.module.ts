@@ -15,7 +15,7 @@ import {MatFormFieldModule}  from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
-import { DataService } from './data.service';
+import { DataService } from './service/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { InputDataComponent } from './component/input-data/input-data.component';
 import { TeamService } from './service/team.service';

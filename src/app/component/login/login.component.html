@@ -1,30 +1,48 @@
-<div class="login-container">
-    <form [formGroup]="login" (ngSubmit)="onSubmit()" class="form">
-        <mat-card class="card">
-            <mat-card-header>
-                <h1>Login Form</h1>
-            </mat-card-header>
-            <mat-card-content>
-                <mat-form-field class="form-field" appearance="outline">
-                    <mat-label>Email ID: </mat-label>
-                    <input type="email" matInput formControlName="emailId" >
-                    <button type="button" mat-icon-button matSuffix>
-                        <mat-icon>account_box</mat-icon>
-                    </button>
-                </mat-form-field>
-                <mat-form-field class="form-field"  appearance="outline">
-                    <mat-label>Password: </mat-label>
-                    <button type="button" mat-icon-button matSuffix (click)="onShowPassword()">
-                        <mat-icon>{{showPassword ? 'visibility_off': 'visibility' }}</mat-icon>
-                    </button>
-                    <input [type]="showPassword ? 'password': 'text'" matInput formControlName="password" class="form-input">
-                </mat-form-field>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!login.valid">Login</button>
-            </mat-card-actions>
-        </mat-card>
-    </form>
-
-</div>
-<!-- <app-navbar [logged]="loggedIn"></app-navbar> -->
+<section class="vh-100">
+<div class="container-fluid h-100">
+            <div class="bg-image h-100 w-100 mb-5 shadow-1-strong" style="background-image: url('assets/sport2.jpg');">
+                <div class="row d-flex justify-content-center  align-items-center h-100">
+                <div class="card shadow col-md-6 col-sm-8 col-lg-4 w-500 h-500 max overflow-hidden">
+                    <div class="card-body">
+                        <h5 class="card-title text-center fw-bold fs-1 mb-4">Login</h5>
+                            <form class="form" [formGroup]="login" (ngSubmit)="onSubmit()" >
+                                <div class="mb-3 form-group">  
+                                    <label class="form-label" for="emailId">Email Id: </label>
+                                    <input class="form-control" type="email" id="emailId" autocomplete="username" placeholder="Enter EmailId" formControlName="emailId" required>
+                                    <div *ngIf="login.get('emailId')?.touched && login.get('emailId')?.invalid" class="text-danger mb-2">
+                                    <small class="mb-2" *ngIf="login.get('emailId')?.hasError('required')">Email ID is required</small>
+                                    <small  class="mb-2" *ngIf="login.get('emailId')?.hasError('email')">Please enter proper email id</small>
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-group">
+                                    <label class="form-label" for="password">Password: </label>
+                                    <input class="form-control" type="password" id="password" autocomplete="current-password" placeholder="Enter Password" formControlName="password" required>
+                                    <div *ngIf="login.get('password')?.touched && login.get('password')?.invalid" class="text-danger">
+                                        <small *ngIf="login.get('password')?.hasError('required')">Passowrd is required</small>
+                                        <small *ngIf="login.get('password')?.hasError('pattern')">
+                                            Please enter a valid password. It should contain:
+                                            <ul>
+                                              <li>At least one lowercase letter (a-z)</li>
+                                              <li>At least one uppercase letter (A-Z)</li>
+                                              <li>At least one number (0-9)</li>
+                                              <li>At least one special character (&commat;, &dollar;, &excl;, &percnt;, &ast;, &quest;, &amp;)</li>
+                                              <li>Minimum length of 8 characters</li>
+                                            </ul>
+                                        </small>
+                                        </div>
+                                </div>
+                                
+                                <button type="submit" [disabled]="!login.valid" class="btn btn-block btn-primary mb-3 p-2" >Login</button>
+                            </form>
+                            <a href="#!">Forgot password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+       
+    </section>
+   
+   
+    
+   

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 import { Movement } from 'src/app/model/movement';
 import { MovementService } from 'src/app/service/movement.service';
 
@@ -11,6 +12,7 @@ import { MovementService } from 'src/app/service/movement.service';
 export class MovementsComponent {
 //to retrieve all the movements from the movement service
 movements: Movement[] =[]
+destroy$ = new Subject<void>();
 
 //to add a new movement
 newMovement = new FormGroup({
@@ -31,23 +33,20 @@ ngOnInit(){
 }
 //to get all the movement details
 getMovements(){
-  this.movementService.getMovements().subscribe((data)=>{
-    this.movements = data
+  this.movementService.getMovements().pipe(takeUntil(this.destroy$)).subscribe((data)=>{
+   this.movements = data
   })
 }
 
 //to add a new movement
 addMovement(movement: any){
-  this.movementService.addMovement(movement).subscribe(()=>{
-    this.ngOnInit();
-  })
+  this.movementService.addMovement(movement).pipe(takeUntil(this.destroy$)).subscribe(()=> this.getMovements());
+  this.newMovement.reset();
 }
 
 //to update any movement
 updateMovement(){
-  this.movementService.updateMovement(this.editMovement.value, this.id).subscribe(()=>{
-    this.ngOnInit();
-  })
+  this.movementService.updateMovement(this.editMovement.value, this.id).pipe(takeUntil(this.destroy$)).subscribe(()=> this.getMovements())
 
 }
 editModal(movement: any){
@@ -59,6 +58,11 @@ editModal(movement: any){
 }
 
 deleteAthlete(movement: any){
-  this.movementService.deleteMovement(movement).subscribe(()=>{this.ngOnInit()})
+  this.movementService.deleteMovement(movement).pipe(takeUntil(this.destroy$)).subscribe(()=> this.getMovements())
+}
+
+ngOnDestroy(){
+  this.destroy$.next();
+  this.destroy$.complete();
 }
 }

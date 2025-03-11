@@ -1,24 +1,9 @@
 <div class="card">
         <img [src]="imgPath" alt="No Image found" class="employee-image" class="employee-image">
-    <div class="details">
+    <div class="details" *ngIf="indAthlete">
         <p>{{"Name: " + indAthlete.name}}</p>
         <p>{{"Age: " +indAthlete.age}}</p>
         <p>{{"Team: " +indAthlete.team}}</p>    
     </div>
     </div>
-<table>
-    <thead>
-        <th>Date</th>
-        <th>Athlete</th>
-        <th>Movement</th>
-        <th>Performance</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let p of indPerformance">
-            <td>{{p.date}}</td>
-            <td>{{p.name}}</td>
-            <td>{{p.movement}}</td>
-            <td>{{p.assessment}}</td>
-        </tr>
-    </tbody>
-</table>
+

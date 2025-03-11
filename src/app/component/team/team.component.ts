@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { DataService } from 'src/app/data.service';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { DataService } from 'src/app/service/data.service';
 import { Athlete } from 'src/app/model/athlete';
 import { Team } from 'src/app/model/team';
 import { PerformanceService } from 'src/app/service/performance.service';
 import { TeamService } from 'src/app/service/team.service';
+import { Subject, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-team',
@@ -13,86 +14,129 @@ import { TeamService } from 'src/app/service/team.service';
 })
 export class TeamComponent {
 
-//to retrieve the athletes information
-players: Athlete[] =[]
-
 //to retrieve the team information
 teams: Team[]=[]
 teamAthletes: Athlete[]=[]
 
 //to edit the team by id
-id: number =0
+id: string | undefined
 
 //to add new athlete
-newTeam = new FormGroup({
-  team_name: new FormControl(),
-  athletes: new FormGroup({
-    name: new FormControl(''),
-    age: new FormControl(''),
-    team: new FormControl('')
-  })
-})
+newTeam!: FormGroup
+destroy$ = new Subject<void>();
 
 //to update new athlete
-updateTeam = new FormGroup({
-  team_name: new FormControl(),
-  athletes: new FormGroup({
-    name: new FormControl(''),
-    age: new FormControl(''),
-    team: new FormControl('')
-  })
-})
+updateTeam !: FormGroup
+newTeamAthlete!: FormGroup
+addNewAthlete:boolean = false
 
 constructor(private dataService : DataService, private teamService: TeamService){}
 
 ngOnInit() {
-  this.getAthletes();
+  this.updateTeam = new FormGroup({
+    team_name: new FormControl(),
+    athletes: new FormArray([ 
+      new FormGroup({
+      name: new FormControl(''),
+      age: new FormControl(''),
+    })
+  ])
+  })
+
+  this.newTeam = new FormGroup({
+    team_name: new FormControl(),
+    athletes: new FormArray([
+      new FormGroup({
+        name: new FormControl(''),
+        age: new FormControl(''),
+        team: new FormControl('')
+      })
+    ])
+  })
+
+  this.newTeamAthlete = new FormGroup({
+    name: new FormControl(''),
+    age: new FormControl(''),
+    team: new FormControl('')
+  })
   this.getTeams();
 }
 
-//to get all the athletes information
-getAthletes() {
-  this.dataService.getAthletes().subscribe((data) => {
-    this.players = data
-  });
+
+get athletes(){
+  return this.newTeam.get('athletes') as FormArray
+}
+
+get athletes_update(){
+  return this.updateTeam.get('athletes') as FormArray
 }
 
 //to get the team details
 getTeams(){
   this.teamService.getTeams().subscribe((data)=>{
-    this.teams = data
+    this.teams = data;
   })
+}
+
+
+onAddAthlete(){
+  let athlete1 = new FormGroup({
+    name: new FormControl(''),
+    age: new FormControl(''),
+    team: new FormControl('')
+  })
+  this.athletes.push(athlete1)
 }
 
 //to add a new team
-addTeam(team: any){
-  this.teamService.addTeam(team).subscribe(()=>{
-    this.ngOnInit();
-  })
+addTeam(team: Team){
+  if(team.athletes ){
+    team.athletes.forEach(athlete => {
+      athlete.team = team.team_name;
+    })
+  }
+  this.teamService.addTeam(team).pipe(takeUntil(this.destroy$)).subscribe(()=> this.getTeams());
+  this.athletes.clear();
+  this.newTeam.reset();
+
 }
 
 //to edit the given team
-editTeam(){
-  this.teamService.editTeam(this.editTeam, this.id).subscribe(()=>{
-    this.ngOnInit();
-  })
+editTeam(updateTeam: any){
+  this.teamService.editTeam(updateTeam, this.id).pipe(takeUntil(this.destroy$)).subscribe((data)=> {
+    this.getTeams();
+  });
+}
+
+deleteTeamAthlete(id: any){
+  return this.athletes_update.removeAt(id);
 }
 
 // to delete the team
 deleteTeam(team: any){
-  this.teamService.deleteTeam(team).subscribe(()=>{
-    this.ngOnInit();
-  })
+  this.teamService.deleteTeam(team).pipe(takeUntil(this.destroy$)).subscribe(()=> this.getTeams());
 }
 editModal(team: Team){
   this.updateTeam.patchValue({
-    team_name: team.team_name,
+    team_name: team.team_name
   })
-//   this.updateTeam.setValue({
-//     team_name: team.team_name,
-//     // athletes[]: team.athletes
-//   })
-//   this.id = team.id
+  this.athletes_update.clear();
+  if(team.athletes){
+    team.athletes.forEach(athlete => {
+      let athele1 = new FormGroup({
+         name: new FormControl(athlete.name),
+         age: new FormControl(athlete.age),
+       })
+       this.athletes_update.push(athele1)
+     }
+     )
+  }
+  this.id = team.id;
+}
+
+ngOnDestroy(){
+  this.destroy$.next();
+  this.destroy$.complete();
 }
 
 }

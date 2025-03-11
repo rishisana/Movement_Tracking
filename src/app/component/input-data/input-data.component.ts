@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { DataService } from 'src/app/data.service';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { DataService } from 'src/app/service/data.service';
 import { Athlete } from 'src/app/model/athlete';
-import { Input } from 'src/app/model/input';
 import { Movement } from 'src/app/model/movement';
 import { Team } from 'src/app/model/team';
 import { MovementService } from 'src/app/service/movement.service';
 import { PerformanceService } from 'src/app/service/performance.service';
 import { TeamService } from 'src/app/service/team.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-input-data',
@@ -16,79 +16,91 @@ import { TeamService } from 'src/app/service/team.service';
 })
 export class InputDataComponent {
 
-  //variable to store all the user inputs of team performance
   athlete_performance: Partial<{ date: any; name: any; movement: any; assessment: any; }>[] = []
 
-  athletes: Athlete[] = []
+  athletesData: Athlete[] = []
 
-  //for connecting the html form and ts we are using form group and form control
+  destroy$ = new Subject<void>();
   performance = new FormGroup({
     date: new FormControl(),
-    movement: new FormControl(),
-    team_name: new FormControl(),
-      athlete: new FormGroup({
-        athlete_name: new FormControl(),
-        assessment: new FormControl()
-      })
+    movement: new FormControl(''),
+    team_name: new FormControl(''),
+      athletes: new FormArray([])
     })
 
-  // id: new FormControl()
-  // mov_name: string = ''
 
   //to get the team details
   teams: Team[] =[]
   movements: Movement[] = []
   teamSelected= false
   selectedOption: string =''
+  
+  constructor(private movementService: MovementService, private dataService: DataService, private performanceService: PerformanceService, private teamService: TeamService) { }
+
   ngOnInit() {
     this.getMovements();
     this.getTeams();
-   // this.getAthletes();
   }
-  constructor(private movementService: MovementService, private dataService: DataService, 
-    private performanceService: PerformanceService, private teamService: TeamService) { }
 
   //to get all the list of movements
   getMovements() {
-    this.movementService.getMovements().subscribe((data) => { 
+    this.movementService.getMovements().pipe(takeUntil(this.destroy$)).subscribe((data) => { 
       this.movements = data
     })
   }
-  //to get all the athlete details
-  // getAthletes() {
-  //   this.teams.forEach((d)=>{
-  //     this.athletes = d.athletes
-  //    })
-  // }
+ 
 
   //To get the team details
   getTeams(){
-    this.teamService.getTeams().subscribe((data)=>{
+    this.teamService.getTeams().pipe(takeUntil(this.destroy$)).subscribe((data)=>{
        this.teams = data;
     })
   }
 
-  onChange(event : any){
-    this.selectedOption = event.target.value;
-    this.teams.forEach((d)=>
-    { if( d.team_name == this.selectedOption){ 
-         this.athletes = d.athletes
-         this.teamSelected = true
-         console.log("The value of the selected option is " + this.selectedOption);
-    }
+  get athletes() : FormArray {
+    return this.performance.get('athletes') as FormArray
+  }
+  
 
-   })
+  onChange(event: any) {
+    this.selectedOption = event.target.value;
+    
+    let athletesArray = this.performance.get('athletes') as FormArray
+    athletesArray.clear();
+    this.teams.forEach((d) => {
+
+      if (d.team_name == this.selectedOption) {
+        this.athletesData = d.athletes
+        this.teamSelected = true
+        this.athletesData.forEach((athlete)=>{
+          let athleteFg = new FormGroup({});
+          athleteFg.addControl('name', new FormControl(athlete.name))
+          athleteFg.addControl('assessment', new FormControl(0))
+          athletesArray.push(athleteFg);
+        })
+      }
+    })
   }
 
   //on submissison of the input form
   onSubmit() {
-    
-    this.performanceService.addPerformanceDetails(this.performance.value).subscribe(() => {
-      console.log("The value of the inputted field is " + this.performance.value);   
-      this.ngOnInit();
+    this.performanceService.addPerformanceDetails(this.performance.value).pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.getMovements();  
+      this.getTeams();
     });
-    this.performance.reset();
+
+    this.athletes.clear();
+    this.performance.reset({
+      date: '',
+      movement: '',  
+      team_name: '', 
+    });
     this.teamSelected =false
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

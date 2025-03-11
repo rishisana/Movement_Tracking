@@ -1,4 +1,5 @@
 export interface Movement{
     mov_name : string,
-    type: string
+    type: string,
+    id?: string 
 }

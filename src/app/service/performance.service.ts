@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map, of, tap } from 'rxjs';
 import { Input } from '../model/input';
 
 @Injectable({
@@ -11,22 +11,29 @@ export class PerformanceService {
   athletePerformance: Partial<{ date: any; name: any; movement: any; assessment: any; }>[] =[]
   serviceUrl : string
   constructor(private http: HttpClient) { 
-    this.serviceUrl = "http://localhost:3000/inputs"
+    this.serviceUrl = "https://capstone-31832-default-rtdb.firebaseio.com/"
   }
 
   addPerformanceDetails(input: any): Observable<Input>{
-    console.log("Entered into the performance service ");
-    console.log("The value of the input is " + input);
-    
-    return this.http.post<Input>(this.serviceUrl, input);
+    return this.http.post<Input>(this.serviceUrl+"performance.json" , input);
   }
 
   getPerformanceDetails(): Observable<Input[]>{
-    return this.http.get<Input[]>(this.serviceUrl);
+    let input: Input[] = []
+    return this.http.get<{[key:string]: Input}>(this.serviceUrl+"performance.json").pipe(map((data)=>{
+      
+      for(let key in data){
+        if(data.hasOwnProperty(key)){
+          input.push({...data[key], id:key})
+        }
+      }
+      return input;
+     })
+     );
   }
   
   deletePerformanceDetails(input: any): Observable<Input>{
-    return this.http.delete<Input>(this.serviceUrl+ "/"+ input.id);
+    return this.http.delete<Input>(this.serviceUrl+ "performance/"+ input.id + ".json");
   }
  
 }

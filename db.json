@@ -1,31 +1,25 @@
 {
   "athletes": [
     {
-      "name": "Chiru",
-      "age": 23,
-      "team": "Team2",
-      "id": 1
-    },
-    {
-      "id": 2,
+      "id": "2",
       "name": "Ram",
       "age": 21,
       "team": "Team1"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Sita",
       "age": 26,
       "team": "Team1"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Venky",
       "age": 25,
       "team": "Team2"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Nag",
       "age": 28,
       "team": "Team2"
@@ -34,92 +28,152 @@
       "name": "Pallavi",
       "age": 21,
       "team": "Team3",
-      "id": 6
+      "id": "6"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Poo",
       "age": 27,
       "team": "Team2"
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "sam",
       "age": 22,
       "team": "Team3"
     },
     {
-      "name": "manisha",
+      "name": "man",
       "age": 28,
       "team": "Team2",
-      "id": 12
+      "id": "12"
     }
   ],
   "movements": [
     {
       "mov_name": "vertical",
       "type": "speed",
-      "id": 1
+      "id": "1"
     },
     {
       "mov_name": "back squat",
       "type": "weight",
-      "id": 2
+      "id": "2"
     },
     {
       "mov_name": "bench press",
       "type": "speed",
-      "id": 3
+      "id": "3"
+    },
+    {
+      "id": "74bc",
+      "mov_name": "Deadlift",
+      "type": "Weight"
+    },
+    {
+      "id": "57c0",
+      "mov_name": "Overhead Press",
+      "type": "Speed"
+    },
+    {
+      "id": "c3b7",
+      "mov_name": "Front Squat",
+      "type": "Weight"
+    },
+    {
+      "id": "6a2c",
+      "mov_name": "Box Jump",
+      "type": "Height"
+    },
+    {
+      "id": "f3d2",
+      "mov_name": "Sprint",
+      "type": "Time"
     }
   ],
   "teams": [
     {
+      "id": "344e",
       "team_name": "Team1",
       "athletes": [
         {
-          "id": 8,
-          "name": "Poo",
-          "age": 27,
+          "name": "ram",
+          "age": "27",
           "team": "Team1"
         },
         {
-          "id": 2,
-          "name": "Ram",
-          "age": 21,
+          "name": "shyam",
+          "age": "32",
           "team": "Team1"
         },
         {
-          "id": 3,
-          "name": "Sita",
-          "age": 26,
+          "name": "hanuman",
+          "age": "100",
           "team": "Team1"
         }
-      ],
-      "id": 1
+      ]
     },
     {
+      "id": "ba9f",
       "team_name": "Team2",
       "athletes": [
         {
-          "id": 5,
-          "name": "Nag",
-          "age": 28,
+          "name": "Sai",
+          "age": "100",
           "team": "Team2"
         },
         {
-          "id": 2,
-          "name": "Ram",
-          "age": 21,
+          "name": "God",
+          "age": "100",
           "team": "Team2"
         },
         {
+          "name": "sai ram",
+          "age": "100",
+          "team": "Team2"
+        },
+        {
+          "name": "baba",
+          "age": "100",
+          "team": "Team2"
+        },
+        {
+          "name": "SAISAI",
+          "age": 32,
+          "team": "Team2"
+        }
+      ]
+    },
+    {
+      "id": "145f",
+      "team_name": "Team3",
+      "athletes": [
+        {
+          "name": "Lilly",
+          "age": "21",
+          "team": "Team3"
+        },
+        {
+          "name": "Mango",
+          "age": "32",
+          "team": "Team3"
           "name": "manisha",
           "age": 28,
           "team": "Team2",
           "id": 12
         }
-      ],
-      "id": 2
+      ]
+    },
+    {
+      "id": "52bc",
+      "team_name": "Team4",
+      "athletes": [
+        {
+          "name": "Alex",
+          "age": "21",
+          "team": "Team4"
+        }
+      ]
     }
   ],
   "inputs": [
@@ -131,31 +185,52 @@
         "athlete_name": "Nag",
         "assessment": 21
       },
-      "id": 1
+      "id": "1"
     },
     {
-      "date": "2023-11-22",
+      "id": "a874",
+      "date": "2025-03-06",
       "movement": "back squat",
       "team_name": "Team1",
-      "athlete": {
-        "athlete_name": null,
-        "assessment": 23
-      },
-      "id": 2
+      "athletes": [
+        {
+          "name": "Poo",
+          "assessment": 0
+        },
+        {
+          "name": "Ram",
+          "assessment": 0
+        },
+        {
+          "name": "Sita",
+          "assessment": 0
+        }
+      ]
     },
     {
-      "date": "2023-11-15",
-      "movement": "back squat",
-      "team_name": "Team1",
-      "athlete": {
-        "athlete_name": null,
-        "assessment": 28
-      },
-      "id": 3
-    },
-    {
-      "date": "2023-11-21",
+      "id": "6f78",
+      "date": "2025-03-06",
       "movement": "bench press",
+      "team_name": "Team2",
+      "athlete": {
+        "athlete_name": null,
+        "assessment": 32
+      }
+    },
+    {
+      "id": "e028",
+      "date": "2025-03-13",
+      "movement": null,
+      "team_name": null,
+      "athlete": {
+        "athlete_name": null,
+        "assessment": 32
+      }
+    },
+    {
+      "id": "e69e",
+      "date": "2025-03-06",
+      "movement": "vertical",
       "team_name": "Team1",
       "athlete": {
         "athlete_name": null,
@@ -163,6 +238,5 @@
       },
       "id": 4
     }
-  
   ]
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataService } from 'src/app/data.service';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +11,10 @@ export class NavbarComponent {
   
   constructor(private dataservice: DataService){}
   ngOnInit(): void {   
+  }
+
+  onClick(){
+    this.userlogin = false;
   }
   
   get userlogin(): boolean{

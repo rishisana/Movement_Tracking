@@ -9,6 +9,7 @@ import { NotfoundComponent } from './component/notfound/notfound.component';
 const routes: Routes = [
   
   {path: 'team', component: TeamComponent},
+  {path: 'movement', component: MovementComponent},
   {path: 'login', component: LoginComponent},
   {path: 'input', component: InputDataComponent},
   

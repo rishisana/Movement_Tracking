@@ -1,34 +1,40 @@
-<h1>Enter the Athlete Details:</h1>
-<div class="card">
-    <form [formGroup]="performance" (ngSubmit)="onSubmit()">
-        <!-- For the Date Field -->
-        <div class="form-element">
-            <label for="date">Date: </label>
-            <input id="date" type="date" placeholder="Enter date" formControlName="date">
-        </div>
-        <!-- For Movement field-->
-        <div class="form-element">
-            <label for="movements">Movement: </label>
-            <select id="movements" formControlName="movement">
-                <option *ngFor="let opt of movements" [value]="opt.mov_name">{{opt.mov_name}}</option>
-            </select>
-        </div>
+<div class="container">
+    <h1 class="text-center fs-2">Enter the Athlete Details:</h1>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card p-3">
+            <div class="card-body">
+                <form [formGroup]="performance" (ngSubmit)="onSubmit()">
+                    <!-- For the Date Field -->
+                    <label for="date" class="form-label">Date: </label>
+                    <input id="date" class="form-control" type="date" placeholder="Enter date" formControlName="date">
+                    <!-- For Movement field-->
+                    <label for="movements" class="form-label">Movement: </label>
+                    <select id="movements" formControlName="movement" class="form-select">
+                        <option value="" disabled selected >-- Select Movement --</option>
+                        <option *ngFor="let opt of movements" [value]="opt.mov_name">{{opt.mov_name}}</option>
+                    </select>
 
-        <!--For the team name-->
-        <div class="form-element">
-            <label for="team_name">Team Name: </label>
-            <select id="team_name" name="selectedOption" formControlName="team_name" (change)="onChange($event)">
-                <option *ngFor="let t of teams" [value]="t.team_name">{{t.team_name}}</option>
-            </select>
-        </div>
-
-        <!--For athlete name and performance-->
-        <div class="form-element">
-            <div formGroupName="athlete" *ngFor="let athlete of athletes">
-                <input class="specialInput" type="text" placeholder={{athlete.name}} formControlName="athlete_name">
-                <input type="number" placeholder="Enter value" formControlName="assessment">
+                    <!--For the team name-->
+                    <label for="team_name" class="form-label">Team Name: </label>
+                    <select id="team_name" name="selectedOption" class="form-select" formControlName="team_name"
+                        (change)="onChange($event)">
+                        <option value="" disabled selected>-- Select Team --</option>
+                        <option *ngFor="let t of teams" [value]="t.team_name">{{t.team_name}}</option>
+                    </select>
+                    <!--For athlete name and performance-->
+                    <div formArrayName="athletes">
+                        <div *ngFor="let athlete of athletes?.controls; let i = index" [formGroupName]="i"> 
+                                <input class="specialInput form-control" type="text" placeholder="Athlete name" formControlName="name">
+                                <input type="number" id="assessment" class="form-control" placeholder="Enter the assessment value"
+                                    formControlName="assessment">
+                         
+                    
+                        </div>
+                        
+                    </div>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </form>
             </div>
-            <button class="btn btn-primary" type="submit">Save</button>
         </div>
-    </form>
+    </div>
 </div>

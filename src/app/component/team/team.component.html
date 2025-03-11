@@ -1,74 +1,97 @@
-<table>
-    <thead>
-        <th>Team</th>
-        <th>Athletes</th>
-        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addTeam">Add Team</button>
-    </thead>
-    <tbody>
-        <tr *ngFor="let t of teams">
-            <td>{{t.team_name}}</td>
-            <td *ngFor="let a of t.athletes">
-                {{a.name}} 
-            </td>
-            <button class="btn btn-outline-success" (click)="editModal(t)" data-bs-toggle="modal" data-bs-target="#editTeam">Edit</button>
-            <button class="btn btn-outline-warning" (click)="deleteTeam(t)">Delete</button>
-        </tr>
-    </tbody>
-</table>
+<div class="container mt-4">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Team</th>
+                <th>Athletes</th>
+                <th>
+                    <button class="btn btn-outline-light btn-sm ms-4" data-bs-toggle="modal" data-bs-target="#addTeam">Add Team</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of teams">
+                <td>{{t.team_name}}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let a of t.athletes" >{{ a.name}}</li>
+                    </ul>
+                    
+                </td>
+                <td>
+                    <button class="btn btn-outline-success btn-sm me-2 ms-4" (click)="editModal(t)" data-bs-toggle="modal" data-bs-target="#editTeam">Edit</button>
+                    <button class="btn btn-outline-warning btn-sm" (click)="deleteTeam(t)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <!-- modal to edit team -->
-<div class="modal fade" id="editTeam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="editTeam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Team</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="teamEditButton">
-                    <form [formGroup]="updateTeam">
-                        <input type="text" placeholder="Enter Team Name" formControlName="team_name">
-                        <div formGroupName="athletes">
-                        <input type="text" placeholder="Enter Name" formControlName="name">
-                        <input type="text" placeholder="Enter Age" formControlName="age">
-                        <input type="text" placeholder="Enter Team" formControlName="team">
+                <form [formGroup]="updateTeam">
+                    <div class="mb-3">
+                        <input class="form-control border-0 fw-bold" formControlName="team_name" placeholder="Team Name">
                     </div>
-                    </form>
-                </div>
+                    
+                    <div formArrayName="athletes">
+                        <div *ngFor="let control of athletes_update?.controls; let i = index" [formGroupName]="i">
+                            <div class="d-flex align-items-center mb-2">
+                                <input class="form-control border-0" formControlName="name" placeholder="Athlete Name">
+                                <i class="fa fa-trash ms-2 text-danger" (click)="deleteTeamAthlete(i)" style="cursor: pointer;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editTeam()">Update
-                    Athlete</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editTeam(updateTeam.value)">Update Team</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- modal to add athlete -->
-<div class="modal fade" id="addTeam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- model to add team -->
+<div class="modal fade" id="addTeam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Athlete</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Team</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="addButton">
+            
                     <form [formGroup]="newTeam">
-                        <input type="text" placeholder="Enter Name" formControlName="name">
-                        <input type="text" placeholder="Enter Age" formControlName="age">
-                        <input type="text" placeholder="Enter Team" formControlName="team">
+                        <!-- Team Name Input -->
+                        <div class="mb-4">
+                            <input type="text" class="form-control" placeholder="Enter Team name" formControlName="team_name">
+                        </div>
+                        
+                        <!-- Athletes Form Array -->
+                        <div formArrayName="athletes">
+                            <div *ngFor="let control of athletes.controls; let i = index" [formGroupName]="i" class="mb-3">
+                                    <input type="text" class="form-control mb-2" placeholder="Enter Name" formControlName="name">
+                                    <input type="text" class="form-control mb-2" placeholder="Enter Age" formControlName="age">
+                            </div>
+                            <!-- Button to Add New Athlete -->
+                            <button type="button" class="btn btn-outline-primary mt-2" (click)="onAddAthlete()">Add Athlete</button>
+                        </div>
                     </form>
-                </div>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addTeam(newTeam.value)">Update
-                    Athlete</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addTeam(newTeam.value)">Add Team</button>
             </div>
         </div>
     </div>
 </div>
+

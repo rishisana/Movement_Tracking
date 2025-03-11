@@ -1,68 +1,88 @@
-<h1>List of the Movements: </h1>
-<table>
-    <thead>
-        <th>Movement</th>
-        <th>Type</th>
-        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addMovement">Add Movement</button>
+<div class="container-fluid">
+<h1 class="my-3">List of the Movements:</h1>
+
+<!-- Table to display movements -->
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Movement</th>
+            <th>Type</th>
+            <th>
+                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addMovement">Add Movement</button>
+            </th>
+        </tr>
     </thead>
     <tbody>
         <tr *ngFor="let mov of movements">
             <td>{{mov.mov_name}}</td>
             <td>{{mov.type}}</td>
-            <button class="btn btn-outline-success" (click)="editModal(mov)" data-bs-toggle="modal" data-bs-target="#editMovement">Edit</button>
-            <button class="btn btn-outline-warning" (click)="deleteAthlete(mov)">Delete</button>
+            <td>
+                <!-- Edit and Delete buttons -->
+                <button class="btn btn-outline-success btn-sm me-2" (click)="editModal(mov)" data-bs-toggle="modal" data-bs-target="#editMovement"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-outline-warning btn-sm" (click)="deleteAthlete(mov)"><i class="fa fa-trash"></i></button>
+            </td>
         </tr>
     </tbody>
 </table>
+</div>
 
 <!-- modal to edit movement -->
 <div class="modal fade" id="editMovement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Movement</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="editButton">
-                    <form [formGroup]="editMovement">
-                        <input type="text" placeholder="Enter movement name" name="mov_name" formControlName="mov_name">
-                        <input type="text" placeholder="Enter type" name="type" formControlName="type">
-                    </form>
-                </div>
+                <!-- Form inside modal -->
+                <form [formGroup]="editMovement">
+                    <div class="mb-3">
+                        <label for="mov_name" class="form-label">Movement Name</label>
+                        <input type="text" id="mov_name" placeholder="Enter movement name" class="form-control" name="mov_name" formControlName="mov_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                        <input type="text" id="type" placeholder="Enter type" class="form-control" name="type" formControlName="type">
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateMovement()">Update
-                    Movement</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateMovement()">Update Movement</button>
             </div>
         </div>
     </div>
 </div>
 
+
 <!-- modal to add movement -->
 <div class="modal fade" id="addMovement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Movement: </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="editButton">
-                    <form [formGroup]="newMovement">
-                        <input type="text" placeholder="Enter movement name" formControlName="mov_name">
-                        <input type="text" placeholder="Enter type" formControlName="type">
-                    </form>
+aria-labelledby="staticBackdropLabel">
+<div class="modal-dialog modal-md">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Movement</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!-- Form inside modal -->
+            <form [formGroup]="newMovement">
+                <div class="mb-3">
+                    <label for="mov_name" class="form-label">Movement Name</label>
+                    <input type="text" id="mov_name" class="form-control" placeholder="Enter movement name" formControlName="mov_name">
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addMovement(newMovement.value)">Update
-                    Athlete</button>
-            </div>
+                <div class="mb-3">
+                    <label for="type" class="form-label">Type</label>
+                    <input type="text" id="type" class="form-control" placeholder="Enter type" formControlName="type">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addMovement(newMovement.value)">Add Movement</button>
         </div>
     </div>
+</div>
 </div>
