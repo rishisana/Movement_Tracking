@@ -22,6 +22,9 @@ import { TeamService } from './service/team.service';
 import { MovementService } from './service/movement.service';
 import { PerformanceService } from './service/performance.service';
 import { NotfoundComponent } from './component/notfound/notfound.component';
+import { MovementsComponent } from './movements/movements.component';
+import { AtheletesComponent } from './atheletes/atheletes.component';
+import { IndAthleteComponent } from './atheletes/ind-athlete/ind-athlete.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +34,9 @@ import { NotfoundComponent } from './component/notfound/notfound.component';
     TeamComponent,
     InputDataComponent,
     NotfoundComponent,
+    MovementsComponent,
+    AtheletesComponent,
+    IndAthleteComponent
   ],
   imports: [
     BrowserModule,
